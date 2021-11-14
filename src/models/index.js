@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import config from '../config/config';
+import config from '../config/config.js';
 
 const Sequelize = require('sequelize');
 

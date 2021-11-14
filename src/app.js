@@ -4,12 +4,12 @@ import compression from 'compression';
 import cors from 'cors';
 import httpStatus from 'http-status';
 
-import config from './config/config';
-import morgan from './config/morgan';
+import config from './config/config.js';
+import morgan from './config/morgan.js';
 // import authLimiter from'./middlewares/rateLimiter');
-import routes from './routes/v1';
-import { errorConverter, errorHandler } from './middlewares/error';
-import ApiError from './utils/ApiError';
+import routes from './routes/v1.js';
+import { errorConverter, errorHandler } from './middlewares/error.js';
+import ApiError from './utils/ApiError.js';
 
 // require('./libs/agenda');
 
