@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 import config from '../config/config';
+import logger from '../config/logger';
 
 const Sequelize = require('sequelize');
 
@@ -26,7 +27,8 @@ fs.readdirSync(__dirname)
     );
   })
   .forEach((file) => {
-    const model = sequelize['import'](path.join(__dirname, file));
+    // eslint-disable-next-line import/no-dynamic-require, global-require
+    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
     db[model.name] = model;
   });
 
@@ -39,8 +41,8 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-sequelize.sync().then(function () {
-  console.log('Everything is synced');
+sequelize.sync({ force: !!(config.env === 'development') }).then(function () {
+  logger.info('Everything is synced');
 });
 
 export default db;
